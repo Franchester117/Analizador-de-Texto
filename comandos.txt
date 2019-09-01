@@ -1,0 +1,8 @@
+analizadorTexto [archivo.txt]
+analizadorTexto -c [palabra] [archivo.txt]
+analizadorTexto -d [archivo.txt]
+analizadorTexto -d [numero] [archivo.txt]
+analizadorTexto -l [archivo.txt]
+analizadorTexto -l [numero] [archivo.txt]
+analizadorTexto -s [archivo.txt]
+analizadorTexto -s [numero] [archivo.txt]
