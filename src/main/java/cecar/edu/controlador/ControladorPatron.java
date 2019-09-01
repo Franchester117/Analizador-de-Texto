@@ -27,6 +27,13 @@ import java.util.regex.Pattern;
 **/
 public class ControladorPatron {
     
+    public static void cargarArchivoExp(String comando){
+        Pattern patron = Pattern.compile("cargar archivo");
+        Matcher encaja = patron.matcher(comando);
+        if(encaja.find())
+            ControladorArchivos.cargarArchivo();
+    }
+    
     /**
     * Método que permite ejecutar el comando:
     * analizadorTexto [nombre del archivo]
@@ -102,14 +109,15 @@ public class ControladorPatron {
             Matcher encaja2 = patron2.matcher(comando);
             Matcher encaja3 = patron3.matcher(comando);
             Matcher encaja4 = patron4.matcher(comando);
-            if(encaja1.find())
+            if(encaja1.find()){
                 ControladorMetodos.obtenerCadenaL(f.getAbsolutePath());
-            if(encaja2.find() && Integer.parseInt(v[2])>0)
-                ControladorMetodos.obtenerNCadenasLargas(f.getAbsolutePath(), Integer.parseInt(v[2]));     
-            if(encaja3.find())
+            }if((encaja2.find() && Integer.parseInt(String.valueOf(v[2]))>0)){
+                ControladorMetodos.obtenerNCadenasLargas(f.getAbsolutePath(), Integer.parseInt(v[2]));                              
+            }if(encaja3.find())
                 ControladorMetodos.obtenerCadenaC(f.getAbsolutePath());
-            if(encaja4.find() && Integer.parseInt(v[2])>0)
-                ControladorMetodos.obtenerNCadenasCortas(f.getAbsolutePath(), Integer.parseInt(v[2]));                               
+            if((encaja4.find() && Integer.parseInt(String.valueOf(v[2]))>0)){
+                ControladorMetodos.obtenerNCadenasCortas(f.getAbsolutePath(), Integer.parseInt(v[2]));         
+            }
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
         }   
     }

@@ -91,15 +91,15 @@ public class TestPrograma {
        }else if(Integer.parseInt(numero)>0){
            resLarga = ControladorMetodos.obtenerNCadenasLargas(ruta, Integer.parseInt(numero));
            resCorta = ControladorMetodos.obtenerNCadenasCortas(ruta, Integer.parseInt(numero));
-           
+                      
            listaLarga.add("perro pajaro pato gato cerdo cerdo cerdo cerdo cerdo cerdo cerdo cerdo cerdo\n");
-           listaLarga.add("Guarapo leche arroz azucar caldo sopa pescado gato gato gato gato Guarapo\n");                      
+           listaLarga.add("Guarapo leche arroz azucar caldo sopa pescado gato gato gato gato Guarapo\n");                                 
            
-           for(int i=0; i<listaLarga.size(); i++){
+           for(int i=0; i<resLarga.size(); i++){
                 assertEquals(
                 "Las cadenas largas no coinciden",
-                    listaLarga.get(i),
-                    resLarga.get(i)
+                    resLarga.get(i),
+                    listaLarga.get(i)                    
                 );
            }
            

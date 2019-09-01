@@ -3,7 +3,9 @@ package cecar.edu.controlador;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
@@ -29,6 +31,8 @@ import java.util.TreeMap;
 * @see ArrayList contarFrecuenciaCadena
 **/
 public class ControladorMetodos {
+    
+    public static boolean bandera;
     /**
     * Método que permite generar la linea más larga a partir de un archivo de texto.    
      * @param dir dirección del archivo
@@ -110,14 +114,17 @@ public class ControladorMetodos {
             if(a.getKey()>1){
                 aux1.add(a.getValue());                
             }
-        });                
-
-        cadena="";
-        cadena = aux1.get(0);
-        aux1.removeAll(aux1);
-        aux1.add(cadena);
+        });       
         
-        ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Palabra más frecuente");               
+        try {
+            cadena="";
+            cadena = aux1.get(0);
+            aux1.removeAll(aux1);
+            aux1.add(cadena);
+            ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Palabra más frecuente");
+        } catch (Exception e) {
+        }
+                                           
         return aux1;
     }
     
@@ -167,11 +174,14 @@ public class ControladorMetodos {
             } catch (Exception e) {                
             }                        
          }
-        cadena = cadena.substring(0, cadena.length()-1);        
-
-        aux1.removeAll(aux1);
-        aux1.add(cadena);
-        ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Palabras frecuentes");               
+        try {
+            cadena = cadena.substring(0, cadena.length()-1);        
+            aux1.removeAll(aux1);
+            aux1.add(cadena);
+            ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Palabras frecuentes");
+        } catch (Exception e) {
+        }
+               
         return aux1;
     }
     
@@ -225,7 +235,7 @@ public class ControladorMetodos {
     public static ArrayList<String> obtenerNCadenasLargas(String dir, int n){
         ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
         ArrayList<String> aux = new ArrayList<>();
-        ArrayList<String> aux1 = new ArrayList<>();
+        ArrayList<String> aux1 = new ArrayList<>();        
         Map<Integer, String> map = new HashMap<>();
         
         for(int i=0; i<lista.size(); i++)
@@ -238,14 +248,21 @@ public class ControladorMetodos {
                 aux.add(s.getValue());
             }
         });
-                      
-        Collections.reverse(aux);
+        Collections.reverse(aux);                      
 
-        for(int i=0; i<n; i++)
+        for(int i=0; i<n; i++){            
             try {
                 aux1.add(aux.get(i)+"\n");                  
             } catch (Exception e) {               
-            }               
+            }     
+        }
+        
+        aux1.forEach(a->{
+            System.out.print(a);
+        });
+        
+        Collections.reverse(aux);
+        
         ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Nro. de cadenas más largas");
         return aux1;
     }
@@ -260,26 +277,28 @@ public class ControladorMetodos {
     public static ArrayList<String> obtenerNCadenasCortas(String dir, int n){
         ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
         ArrayList<String> aux = new ArrayList<>();
-        ArrayList<String> aux1 = new ArrayList<>();
+        ArrayList<String> aux1 = new ArrayList<>();        
         Map<Integer, String> map = new HashMap<>();
         
         for(int i=0; i<lista.size(); i++)
             map.put(lista.get(i).length(), lista.get(i));
         
-        Integer max = Collections.max(map.keySet());        
+        Integer min = Collections.max(map.keySet());        
                 
         map.entrySet().forEach(s->{            
-            if(s.getKey()<max){                
-                aux.add(s.getValue());
+            if(s.getKey()<min){                
+                aux.add(s.getValue());                
             }
-        });                                 
-
-        for(int i=0; i<n; i++)
+        });
+                
+        for(int i=0; i<n; i++){            
             try {
                 aux1.add(aux.get(i)+"\n");                  
-            } catch (Exception e) {                
-            }               
+            } catch (Exception e) {               
+            }     
+        }
+  
         ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Nro. de cadenas más cortas");
         return aux1;
-    }
+    }    
 }

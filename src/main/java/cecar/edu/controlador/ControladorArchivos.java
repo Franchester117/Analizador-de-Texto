@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -50,7 +52,7 @@ public class ControladorArchivos {
             if(r==JFileChooser.APPROVE_OPTION){
                 s = j.getSelectedFile().getAbsolutePath();
                 f = new File(s);   
-                System.out.println("El archivo ha sido cargado.");
+                System.out.println("El archivo ["+f.getName()+"] ha sido cargado.");
             }else{
                 System.out.println("El archivo NO ha sido cargado.");
                 System.exit(0);
@@ -97,16 +99,18 @@ public class ControladorArchivos {
         if(archivoSalida.exists()){
             archivoSalida.delete();
         }
+        
         File archivoSalida2 = new File(ruta);
         BufferedWriter bw;
         try {
-            
             bw = new BufferedWriter(new FileWriter(archivoSalida2));
             for (int i=0; i<lineas.size();++i) {
                 bw.write(lineas.get(i));                
             }
+            lineas=null;
             bw.close();
             System.err.println("El archivo ["+archivoSalida.getName()+"] ha sido creado.");
+            archivoSalida.canExecute();
         } catch (IOException e) {
             System.out.println("Error " + e.getMessage());
         }
