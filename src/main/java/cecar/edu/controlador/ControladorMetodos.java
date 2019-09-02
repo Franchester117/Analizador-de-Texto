@@ -248,7 +248,8 @@ public class ControladorMetodos {
                 aux.add(s.getValue());
             }
         });
-        Collections.reverse(aux);                      
+        
+        Collections.sort(aux);                      
 
         for(int i=0; i<n; i++){            
             try {
@@ -256,13 +257,11 @@ public class ControladorMetodos {
             } catch (Exception e) {               
             }     
         }
-        
+        System.out.println("Cadena más larga con numero");
         aux1.forEach(a->{
             System.out.print(a);
         });
-        
-        Collections.reverse(aux);
-        
+                       
         ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Nro. de cadenas más largas");
         return aux1;
     }
