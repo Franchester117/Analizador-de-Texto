@@ -25,14 +25,7 @@ import java.util.regex.Pattern;
 * @see obtenerpalabrasComunesExp(String comando, File f)
 * @see obtenerCadenaLargaCortaExp(String comando, File f)
 **/
-public class ControladorPatron {
-    
-    public static void cargarArchivoExp(String comando){
-        Pattern patron = Pattern.compile("cargar archivo");
-        Matcher encaja = patron.matcher(comando);
-        if(encaja.find())
-            ControladorArchivos.cargarArchivo();
-    }
+public class ControladorPatron {        
     
     /**
     * Método que permite ejecutar el comando:

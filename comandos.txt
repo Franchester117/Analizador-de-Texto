@@ -1,6 +1,6 @@
 cargar archivo
 analizadorTexto [archivo.txt]
-analizadorTexto -c [palabra] [archivo.txt]
+analizadorTexto -c <palabra> [archivo.txt]
 analizadorTexto -d [archivo.txt]
 analizadorTexto -d [numero] [archivo.txt]
 analizadorTexto -l [archivo.txt]

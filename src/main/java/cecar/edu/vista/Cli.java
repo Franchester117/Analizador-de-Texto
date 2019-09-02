@@ -28,11 +28,11 @@ public class Cli {
         File a = ControladorArchivos.cargarArchivo();             
         do{
             try {
-                System.out.print("\n"+"C:"+File.separator+"Users"+File.separator+System.getProperty("user.name")+" > "); entrada = t.nextLine();                
+                System.out.print("\n"+"C:"+File.separator+"Users"+File.separator+System.getProperty("user.name")+">"); entrada = t.nextLine();                
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
-            ControladorPatron.cargarArchivoExp(entrada);
+            
             ControladorPatron.generarResumenExp(entrada, a);
             ControladorPatron.contadorPalabrasExp(entrada, a);
             ControladorPatron.obtenerpalabrasComunesExp(entrada, a);
