@@ -179,4 +179,55 @@ public class ControladorPatron {
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
         }     
     }
+    
+    public static void permutacion9_10Exp(String comando, File f){
+        String[] v = null;
+        try {
+            v = comando.split(" ");            
+            Pattern patron = Pattern.compile("analizadorTexto -s -d "+ f.getName());
+            Matcher encaja = patron.matcher(comando);
+            Pattern patron2 = Pattern.compile("analizadorTexto -s " +v[2]+ " -d "+ f.getName());
+            Matcher encaja2 = patron2.matcher(comando);
+            if(encaja.find())
+                ControladorMetodos.permutacion9(f.getAbsolutePath());  
+            if(encaja2.find() && Integer.parseInt(v[2])>0)                
+                ControladorMetodos.permutacion10(f.getAbsolutePath(),Integer.parseInt(v[2]));            
+            
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+        }     
+    }
+    public static void permutacion11_12Exp(String comando, File f){
+        String[] v = null;
+        try {
+            v = comando.split(" ");            
+            Pattern patron = Pattern.compile("analizadorTexto -l -d "+v[3]+" "+ f.getName());
+            Matcher encaja = patron.matcher(comando);
+            Pattern patron2 = Pattern.compile("analizadorTexto -l " +v[2]+ " -d "+v[4]+" "+ f.getName());
+            Matcher encaja2 = patron2.matcher(comando);
+            if(encaja.find() && Integer.parseInt(v[3])>0)
+                ControladorMetodos.permutacion11(f.getAbsolutePath(),Integer.parseInt(v[3]));  
+            if(encaja2.find() && Integer.parseInt(v[2])>0 && Integer.parseInt(v[4])>0)                
+                ControladorMetodos.permutacion12(f.getAbsolutePath(),Integer.parseInt(v[2]), Integer.parseInt(v[4]));            
+            
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+        }     
+    }
+    
+    public static void permutacion13_14Exp(String comando, File f){
+        String[] v = null;
+        try {
+            v = comando.split(" ");            
+            Pattern patron = Pattern.compile("analizadorTexto -s -d "+v[3]+" "+ f.getName());
+            Matcher encaja = patron.matcher(comando);
+            Pattern patron2 = Pattern.compile("analizadorTexto -s " +v[2]+ " -d "+v[4]+" "+ f.getName());
+            Matcher encaja2 = patron2.matcher(comando);
+            if(encaja.find() && Integer.parseInt(v[3])>0)
+                ControladorMetodos.permutacion13(f.getAbsolutePath(),Integer.parseInt(v[3]));  
+            if(encaja2.find() && Integer.parseInt(v[2])>0 && Integer.parseInt(v[4])>0)                
+                ControladorMetodos.permutacion14(f.getAbsolutePath(),Integer.parseInt(v[2]), Integer.parseInt(v[4]));            
+            
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+        }     
+    }
+    
 }

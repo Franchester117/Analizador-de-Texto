@@ -1,69 +1,31 @@
+Primordiales
+
 analizadorTexto [nombre archivo.txt]
-	Generará la linea más larga.
-	Ejemplo:
-	kjasdjhasldasd
-	asdaskd
-	saasdsdass
-	Salida en documento: kjasdjhasldasd
 
 analizadorTexto -c <palabra> [nombre archivo.txt]
-	Contará cuantas veces aparece una cadena en cada linea.
-	Ejemplo:
-	perro agua agua gato perro agua
-	maracuya guayaba agua
-	Palabra a comparar: perro
-	Salida en documento:
-	2 perro agua agua gato perro
-	0 maracuya guayaba
+
 analizadorTexto -d [nombre archivo.txt]
-	Genera la palabra más frecuente en el documento
-	Ejemplo:
-	perro agua agua gato perro agua
-	maracuya guayaba agua
-	Salida en documento: agua
-	
 analizadorTexto -d [numero] [nombre archivo.txt]
-	Genera el numero de palabras más frecuentes.
-	Ejemplo:
-	perro agua agua gato perro agua perro
-	maracuya guayaba agua gato
-	Numero de palabras frecuentes 4
-	Salida en documento: agua perro gato
-		
+
 analizadorTexto -l [nombre archivo.txt]
-	Generará la linea más larga.
-	Ejemplo:
-	kjasdjhasldasd
-	asdaskd
-	saasdsdass
-	Salida en documento: kjasdjhasldasd
-	
 analizadorTexto -l [numero] [nombre archivo.txt]
-	Generá el numero de lineas más larga del documento
-	Ejemplo:
-	perro agua agua gato perro agua perro
-	maracuya guayaba agua gato
-	Noticiero
-	Numero de lineas: 2
-	Salida en documento: 
-	perro agua agua gato perro agua perro
-	maracuya guayaba agua gato
 
 analizadorTexto -s [archivo.txt]
-	Generá la linea más corta del documento
-	Ejemplo:
-	perro agua agua gato perro agua perro
-	maracuya guayaba agua gato
-	Noticiero
-	Salida en documento: Noticiero
-
 analizadorTexto -s [numero] [nombre archivo.txt]
-	Generá el numero de lineas más cortas del documento
-	Ejemplo:
-	perro agua agua gato perro agua perro
-	maracuya guayaba agua gato
-	Noticiero
-	Numero de lineas: 2
-	Salida en documento: 
-	Noticiero
-	maracuya guayaba agua gato
+
+permutaciones
+
+analizadorTexto -d -c <palabra> [nombre archivo.txt]
+analizadorTexto -d [numero] -c <palabra> [nombre archivo.txt]
+analizadorTexto -l -c <palabra> [nombre archivo.txt]
+analizadorTexto -l [numero] -c <palabra> [nombre archivo.txt]
+analizadorTexto -s -c <palabra> [nombre archivo.txt]
+analizadorTexto -s [numero] -c <palabra> [nombre archivo.txt]
+analizadorTexto -l -d [nombre archivo.txt]
+analizadorTexto -l [numero] -d [nombre archivo.txt]
+analizadorTexto -s -d [nombre archivo.txt]
+analizadorTexto -s [numero] -d [nombre archivo.txt]
+analizadorTexto -l -d [numero] [nombre archivo.txt]
+analizadorTexto -l [numero] -d [numero] [nombre archivo.txt]
+analizadorTexto -s -d [numero] [nombre archivo.txt]
+analizadorTexto -s[numero] -d [numero] [nombre archivo.txt]

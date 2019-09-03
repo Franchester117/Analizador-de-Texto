@@ -41,6 +41,9 @@ public class Cli {
             ControladorPatron.permutacion3_4Exp(entrada, a);
             ControladorPatron.permutacion5_6Exp(entrada, a);
             ControladorPatron.permutacion7_8Exp(entrada, a);
+            ControladorPatron.permutacion9_10Exp(entrada, a);
+            ControladorPatron.permutacion11_12Exp(entrada, a);
+            ControladorPatron.permutacion13_14Exp(entrada, a);
         }while(!"exit".equalsIgnoreCase(entrada));        
     }
 }

@@ -74,7 +74,7 @@ public class TestPrograma {
     
    @Test
    public void testObtenerCadenaLargaCorta(){
-       String numero="5";
+       String numero="";
        
        String[] cadenaPrueba = {
            "perro pajaro pato gato cerdo cerdo cerdo cerdo cerdo cerdo cerdo cerdo cerdo",
