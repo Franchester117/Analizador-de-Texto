@@ -36,7 +36,11 @@ public class Cli {
             ControladorPatron.generarResumenExp(entrada, a);
             ControladorPatron.contadorPalabrasExp(entrada, a);
             ControladorPatron.obtenerpalabrasComunesExp(entrada, a);
-            ControladorPatron.obtenerCadenaLargaCortaExp(entrada, a);            
+            ControladorPatron.obtenerCadenaLargaCortaExp(entrada, a);      
+            ControladorPatron.permutacion1_2Exp(entrada, a);
+            ControladorPatron.permutacion3_4Exp(entrada, a);
+            ControladorPatron.permutacion5_6Exp(entrada, a);
+            ControladorPatron.permutacion7_8Exp(entrada, a);
         }while(!"exit".equalsIgnoreCase(entrada));        
     }
 }

@@ -1,5 +1,6 @@
 package cecar.edu.controlador;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -297,4 +298,332 @@ public class ControladorMetodos {
         ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Nro. de cadenas más largas");
         return aux1;
     }    
+    
+    
+    //PERMUTACIÓN 1     
+    //analizadorTexto -d -c <palabra> [nombre archivo.txt]
+    public static ArrayList<String> permutacion1(String dir, String cad){
+        ArrayList<String> lineas = ControladorArchivos.leerArchivo(dir);
+        Map<Integer,String> res = new HashMap<>();            
+        ArrayList<String> aux = new ArrayList<>();    
+        ArrayList<String> aux1 = new ArrayList<>(); 
+        int contador = 0;
+        StringTokenizer st;               
+        String cadena = "";
+        
+        for (int i = 0; i < lineas.size(); i++) {
+            cadena+=lineas.get(i)+" ";
+        }        
+
+        st = new StringTokenizer(cadena);
+
+        while(st.hasMoreTokens()){
+            aux.add(st.nextToken());
+        }                                        
+        
+        aux.forEach((r) -> {           
+            res.put(Collections.frequency(aux, r),r);            
+        });
+
+        Map<Integer, String> reverseSortedMap = new TreeMap<>(Collections.reverseOrder());
+
+        reverseSortedMap.putAll(res);
+
+        reverseSortedMap.entrySet().forEach(a->{
+            if(a.getKey()>1){
+                aux1.add(a.getValue());                
+            }
+        });       
+        
+        try {
+            cadena="";
+            cadena = aux1.get(0);
+            aux1.removeAll(aux1);
+            aux1.add(cadena);
+            ArrayList<String> aux2 = new ArrayList<>();            
+            contador=0;
+            for (String s : aux1) {
+                st = new StringTokenizer(s);
+                while(st.hasMoreTokens()){
+                    if(st.nextElement().equals(cad)){
+                        contador++;
+                    }
+                    aux2.add(contador + " " + s);                    
+                }
+            }
+            ControladorArchivos.guardarArchivo(aux2, "Archivo de salida - Permutacion1");
+        } catch (Exception e) {
+        }
+                                           
+        return aux1;
+    }
+    
+    //PERMUTACIÓN 2    
+    //analizadorTexto -d [numero] -c <palabra> [nombre archivo.txt]
+    public static ArrayList<String> permutacion2(String dir, String cad, int n){
+        ArrayList<String> lineas = ControladorArchivos.leerArchivo(dir);
+        Map<Integer,String> res = new HashMap<>();            
+        ArrayList<String> aux = new ArrayList<>();    
+        ArrayList<String> aux1 = new ArrayList<>();         
+        ArrayList<String> aux2 = new ArrayList<>();  
+        StringTokenizer st;               
+        String cadena = "";
+        
+        for (int i = 0; i < lineas.size(); i++) {
+            cadena+=lineas.get(i)+" ";
+        }        
+
+        st = new StringTokenizer(cadena);
+
+        while(st.hasMoreTokens()){
+             aux.add(st.nextToken());
+        }                                
+
+        aux.forEach((r) -> {           
+             res.put(Collections.frequency(aux, r),r);            
+        });
+
+        Map<Integer, String> reverseSortedMap = new TreeMap<>(Collections.reverseOrder());
+
+        reverseSortedMap.putAll(res);
+
+        reverseSortedMap.entrySet().forEach(a->{
+            if(a.getKey()>1){
+                aux1.add(a.getValue());
+            }
+        });
+        cadena="";
+        for(int i=0; i<n; i++){
+            try {                
+                cadena += aux1.get(i) +" ";
+            } catch (Exception e) {                
+            }                        
+         }
+        try {
+            cadena = cadena.substring(0, cadena.length()-1); 
+            
+            aux1.removeAll(aux1);
+            aux1.add(cadena);
+            int c=0;
+            st = null;
+            
+            for (String s : aux1) {
+                st = new StringTokenizer(s);
+                while(st.hasMoreTokens()){
+                    if(st.nextElement().equals(cad)){
+                        c++;
+                    }
+                }
+                aux2.add(c + " " + s + "\n");
+                c=0;
+            }
+            ControladorArchivos.guardarArchivo(aux2, "Archivo de salida - Permutacion2");
+        } catch (Exception e) {
+        }
+               
+        return aux1;
+    }
+    
+    //PERMUTACIÓN 3
+    //analizadorTexto -l -c <palabra> [nombre archivo.txt]
+    public static ArrayList<String> permutacion3(String dir, String cad){
+        ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
+        ArrayList<String> res = new ArrayList<>();
+        String cadMayor=lista.get(0);        
+        for(int i=0; i<lista.size(); i++){
+            if(lista.get(i).length()>cadMayor.length()){
+                cadMayor = lista.get(i);
+            }
+        }            
+        res.add(cadMayor);   
+        int c=0;
+        StringTokenizer st = null;
+        ArrayList<String> aux = new ArrayList<>();
+        for (String r : res) {            
+            st = new StringTokenizer(r);
+            while(st.hasMoreTokens()){
+                if(st.nextElement().equals(cad)){
+                    c++;
+                }                
+            }
+            aux.add(c + " " + r+"\n");
+            c=0;
+        }
+        ControladorArchivos.guardarArchivo(aux, "archivo de salida - Permutacion3");
+        return res;   
+    }
+    
+    //PERMUTACIÓN 4
+    //analizadorTexto -l [numero] -c <palabra> [nombre archivo.txt]
+    public static ArrayList<String> permutacion4(String dir, String cad, int n){
+        ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
+        ArrayList<String> aux = new ArrayList<>();
+        ArrayList<String> aux1 = new ArrayList<>();        
+        SortedMap<Integer, String> tree = new TreeMap(Collections.reverseOrder());
+        
+        Collections.sort(lista);
+        for (int i = 0; i < lista.size(); i++) {
+            tree.put(lista.get(i).length(), lista.get(i));
+        }
+        
+        Integer min = Collections.min(tree.keySet());                                                              
+        
+        tree.entrySet().forEach(s->{            
+            if(s.getKey()>min){               
+                aux.add(s.getValue());                  
+            }
+        });  
+        
+        for (int i = 0; i <n; i++) {
+            try {
+                aux1.add(aux.get(i)+"\n");
+            } catch (Exception e) {
+            }
+        }
+        
+        int c = 0;
+        StringTokenizer st = null;
+        ArrayList<String> aux2 = new ArrayList<>();
+        for (String s : aux1) {
+            st = new StringTokenizer(s);
+            while(st.hasMoreTokens()){
+                if(st.nextElement().equals(cad)){
+                    c++;
+                }
+            }
+            aux2.add(c + " " + s);            
+            c = 0;
+            
+        }
+        
+        ControladorArchivos.guardarArchivo(aux2, "Archivo de salida - permutacion4");
+        return aux1;
+    }
+    
+    //PERMUTACIÓN 5
+    //analizadorTexto -s -c <palabra> [nombre archivo.txt]
+    public static ArrayList<String> permutacion5(String dir, String cad){
+        ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
+        ArrayList<String> res = new ArrayList<>();
+        String cadMenor=lista.get(0);        
+        for(int i=0; i<lista.size(); i++){
+            if(lista.get(i).length()<cadMenor.length()){
+                cadMenor = lista.get(i);
+            }
+        }            
+        res.add(cadMenor);  
+        int c=0;
+        StringTokenizer st =null;
+        ArrayList<String> aux = new ArrayList<>();
+        for (String r : res) {
+            st = new StringTokenizer(r);
+            while(st.hasMoreTokens()){
+                if(st.nextElement().equals(cad)){
+                    c++;
+                }
+            }
+            aux.add(c+" "+r+"\n");
+            c=0;
+        }
+        ControladorArchivos.guardarArchivo(aux, "Permutacion5");
+        return aux;
+    }
+    
+    //PERMUTACIÓN 6
+    //analizadorTexto -s [numero] -c <palabra> [nombre archivo.txt]
+    public static ArrayList<String> permutacion6(String dir, String cad, int n){
+        ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
+        ArrayList<String> aux = new ArrayList<>();
+        ArrayList<String> aux1 = new ArrayList<>();        
+        SortedMap<Integer, String> tree = new TreeMap<>();
+        
+        Collections.sort(lista);
+        for (int i = 0; i < lista.size(); i++) {
+            tree.put(lista.get(i).length(), lista.get(i));
+        }
+        
+        Integer max = Collections.max(tree.keySet());                                                              
+        
+        tree.entrySet().forEach(s->{            
+            if(s.getKey()<max){               
+                aux.add(s.getValue());                  
+            }
+        });  
+        
+        for (int i = 0; i <n; i++) {
+            try {
+                aux1.add(aux.get(i)+"\n");
+            } catch (Exception e) {
+            }
+        }
+        
+        int c = 0;
+        StringTokenizer st = null;
+        ArrayList<String> aux2 = new ArrayList<>();
+        for (String s : aux1) {
+            st = new StringTokenizer(s);
+            while(st.hasMoreTokens()){
+                if(st.nextElement().equals(cad)){
+                    c++;
+                }
+            }
+            aux2.add(c + " " + s);            
+            c = 0;
+            
+        }
+        
+        ControladorArchivos.guardarArchivo(aux2, "Archivo de salida - permutacion6");
+        return aux1;
+    }
+    
+    //PERMUTACIÓN 7
+    //analizadorTexto -l -d [nombre archivo.txt]
+    public static ArrayList<String> permutacion7(String dir){
+        ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
+        ArrayList<String> res = new ArrayList<>();
+        String cadMayor=lista.get(0);        
+        for(int i=0; i<lista.size(); i++){
+            if(lista.get(i).length()>cadMayor.length()){
+                cadMayor = lista.get(i);
+            }
+        }            
+        res.add(cadMayor);  
+        Map<Integer,String> map = new HashMap<>();
+        String cad="";
+        for (int i = 0; i < res.size(); i++) {
+            cad+=res.get(i)+" ";            
+        }
+        StringTokenizer st = new StringTokenizer(cad);
+        ArrayList<String> aux=new ArrayList<>();
+        ArrayList<String> aux2=new ArrayList<>();
+        while(st.hasMoreTokens()){
+            aux.add(st.nextToken());
+        }
+        
+        aux.forEach(s->{
+            map.put(Collections.frequency(aux, s),s);
+        });
+        
+        Map<Integer,String> reverseSortedMap = new TreeMap<>(Collections.reverseOrder());
+        
+        reverseSortedMap.putAll(map);
+        
+        reverseSortedMap.entrySet().forEach(a->{
+            if(a.getKey()>1){
+                aux2.add(a.getValue());                
+            }
+        });       
+        
+        try {
+            cad="";
+            cad = aux2.get(0);
+            aux2.removeAll(aux2);
+            aux2.add(cad);
+            ControladorArchivos.guardarArchivo(aux2, "Archivo de salida - Permutación7");
+        } catch (Exception e) {
+        }
+        
+        //ControladorArchivos.guardarArchivo(res, "archivo de salida - Cadena más larga");
+        return res;  
+    }
 }
