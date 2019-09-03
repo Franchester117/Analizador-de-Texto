@@ -169,12 +169,13 @@ public class ControladorPatron {
             v = comando.split(" ");            
             Pattern patron = Pattern.compile("analizadorTexto -l -d "+ f.getName());
             Matcher encaja = patron.matcher(comando);
-            Pattern patron2 = Pattern.compile("analizadorTexto -l -d "+ f.getName());
+            Pattern patron2 = Pattern.compile("analizadorTexto -l " +v[2]+ " -d "+ f.getName());
             Matcher encaja2 = patron2.matcher(comando);
             if(encaja.find())
                 ControladorMetodos.permutacion7(f.getAbsolutePath());  
-//            if(encaja2.find() && Integer.parseInt(v[2])>0)
-//                ControladorMetodos.permutacion6(f.getAbsolutePath(), v[4], Integer.parseInt(v[2]));
+            if(encaja2.find() && Integer.parseInt(v[2])>0)                
+                ControladorMetodos.permutacion8(f.getAbsolutePath(),Integer.parseInt(v[2]));            
+            
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
         }     
     }

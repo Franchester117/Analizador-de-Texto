@@ -621,9 +621,69 @@ public class ControladorMetodos {
             aux2.add(cad);
             ControladorArchivos.guardarArchivo(aux2, "Archivo de salida - Permutación7");
         } catch (Exception e) {
+        }                
+        return res;  
+    }
+    
+    //PERMUTACIÓN 8
+    //analizadorTexto -l [numero] -d [nombre archivo.txt]
+    public static ArrayList<String> permutacion8(String dir, int n){
+        ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
+        ArrayList<String> aux = new ArrayList<>();
+        ArrayList<String> aux1 = new ArrayList<>();        
+        SortedMap<Integer, String> tree = new TreeMap(Collections.reverseOrder());
+        
+        Collections.sort(lista);
+        for (int i = 0; i < lista.size(); i++) {
+            tree.put(lista.get(i).length(), lista.get(i));
         }
         
-        //ControladorArchivos.guardarArchivo(res, "archivo de salida - Cadena más larga");
-        return res;  
+        Integer min = Collections.min(tree.keySet());                                                              
+        
+        tree.entrySet().forEach(s->{            
+            if(s.getKey()>min){               
+                aux.add(s.getValue());                  
+            }
+        });  
+        
+        for (int i = 0; i <n; i++) {
+            try {
+                aux1.add(aux.get(i)+"\n");
+            } catch (Exception e) {
+            }
+        }
+        String cad="";
+        ArrayList<String> aux3 = new ArrayList<>();
+        ArrayList<String> aux4 = new ArrayList<>();
+        Map<Integer,String> map = new HashMap<>();
+        for(int i=0; i<aux1.size(); i++){
+            cad+=aux1.get(i)+" ";
+        }
+        StringTokenizer st = new StringTokenizer(cad);
+        while(st.hasMoreTokens()){
+            aux3.add(st.nextToken());            
+        }
+        aux3.forEach((r)->{
+            System.out.println(r);
+            map.put(Collections.frequency(aux3, r), r);
+        });
+        
+        Map<Integer,String> reverseSortedMap = new TreeMap(Collections.reverseOrder());
+        reverseSortedMap.putAll(map);
+        reverseSortedMap.entrySet().forEach(s->{
+            if(s.getKey()>1){
+                aux4.add(s.getValue());                               
+            }
+        });
+        try {
+            cad="";
+            cad=aux4.get(0);
+            aux4.removeAll(aux4);
+            aux4.add(cad);
+            ControladorArchivos.guardarArchivo(aux4, "Archivo de salida - Permutacion8");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }        
+        return aux1;
     }
 }
