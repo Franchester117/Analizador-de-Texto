@@ -31,8 +31,7 @@ import java.util.TreeMap;
 * @see ArrayList contarFrecuenciaCadena
 **/
 public class ControladorMetodos {
-    
-    public static boolean bandera;
+        
     /**
     * Método que permite generar la linea más larga a partir de un archivo de texto.    
      * @param dir dirección del archivo
