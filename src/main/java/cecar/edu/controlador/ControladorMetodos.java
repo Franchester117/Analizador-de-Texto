@@ -3,9 +3,8 @@ package cecar.edu.controlador;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.SortedMap;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
@@ -236,32 +235,28 @@ public class ControladorMetodos {
         ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
         ArrayList<String> aux = new ArrayList<>();
         ArrayList<String> aux1 = new ArrayList<>();        
-        Map<Integer, String> map = new HashMap<>();
+        SortedMap<Integer, String> tree = new TreeMap(Collections.reverseOrder());
         
-        for(int i=0; i<lista.size(); i++)
-            map.put(lista.get(i).length(), lista.get(i));
-        
-        Integer min = Collections.min(map.keySet());        
-                
-        map.entrySet().forEach(s->{            
-            if(s.getKey()>min){                
-                aux.add(s.getValue());
-            }
-        });
-        
-        Collections.sort(aux);                      
-
-        for(int i=0; i<n; i++){            
-            try {
-                aux1.add(aux.get(i)+"\n");                  
-            } catch (Exception e) {               
-            }     
+        Collections.sort(lista);
+        for (int i = 0; i < lista.size(); i++) {
+            tree.put(lista.get(i).length(), lista.get(i));
         }
-        System.out.println("Cadena más larga con numero");
-        aux1.forEach(a->{
-            System.out.print(a);
-        });
-                       
+        
+        Integer min = Collections.min(tree.keySet());                                                              
+        
+        tree.entrySet().forEach(s->{            
+            if(s.getKey()>min){               
+                aux.add(s.getValue());                  
+            }
+        });  
+        
+        for (int i = 0; i <n; i++) {
+            try {
+                aux1.add(aux.get(i)+"\n");
+            } catch (Exception e) {
+            }
+        }
+        
         ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Nro. de cadenas más largas");
         return aux1;
     }
@@ -277,27 +272,29 @@ public class ControladorMetodos {
         ArrayList<String> lista = ControladorArchivos.leerArchivo(dir);
         ArrayList<String> aux = new ArrayList<>();
         ArrayList<String> aux1 = new ArrayList<>();        
-        Map<Integer, String> map = new HashMap<>();
+        SortedMap<Integer, String> tree = new TreeMap<>();
         
-        for(int i=0; i<lista.size(); i++)
-            map.put(lista.get(i).length(), lista.get(i));
-        
-        Integer min = Collections.max(map.keySet());        
-                
-        map.entrySet().forEach(s->{            
-            if(s.getKey()<min){                
-                aux.add(s.getValue());                
-            }
-        });
-                
-        for(int i=0; i<n; i++){            
-            try {
-                aux1.add(aux.get(i)+"\n");                  
-            } catch (Exception e) {               
-            }     
+        Collections.sort(lista);
+        for (int i = 0; i < lista.size(); i++) {
+            tree.put(lista.get(i).length(), lista.get(i));
         }
-  
-        ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Nro. de cadenas más cortas");
+        
+        Integer max = Collections.max(tree.keySet());                                        
+       
+        tree.entrySet().forEach(s->{            
+            if(s.getKey()<max){               
+                aux.add(s.getValue());                  
+            }
+        });         
+        
+        for (int i = 0; i <n; i++) {
+            try {
+                aux1.add(aux.get(i)+"\n");
+            } catch (Exception e) {
+            }
+        }
+                
+        ControladorArchivos.guardarArchivo(aux1, "Archivo de salida - Nro. de cadenas más largas");
         return aux1;
     }    
 }

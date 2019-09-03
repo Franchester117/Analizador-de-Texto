@@ -4,6 +4,7 @@ package cecar.edu.pruebas;
 import cecar.edu.controlador.ControladorMetodos;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -30,7 +31,7 @@ import static org.junit.Assert.*;
 **/
 public class TestPrograma {
     
-   String ruta = System.getProperty("user.dir")+File.separator+"Archivos"+File.separator+"ArchivoTest.txt";
+   final String ruta = System.getProperty("user.dir")+File.separator+"Archivos"+File.separator+"ArchivoTest 2.txt";
    
    @Test
    public void testSinOpcion(){
@@ -91,27 +92,33 @@ public class TestPrograma {
        }else if(Integer.parseInt(numero)>0){
            resLarga = ControladorMetodos.obtenerNCadenasLargas(ruta, Integer.parseInt(numero));
            resCorta = ControladorMetodos.obtenerNCadenasCortas(ruta, Integer.parseInt(numero));
-                      
-           listaLarga.add("perro pajaro pato gato cerdo cerdo cerdo cerdo cerdo cerdo cerdo cerdo cerdo\n");
-           listaLarga.add("Guarapo leche arroz azucar caldo sopa pescado gato gato gato gato Guarapo\n");                                 
            
-           for(int i=0; i<resLarga.size(); i++){
-                assertEquals(
-                "Las cadenas largas no coinciden",
-                    resLarga.get(i),
-                    listaLarga.get(i)                    
-                );
+           listaLarga.add("perro pajaro pato gato cerdo cerdo cerdo cerdo cerdo cerdo cerdo cerdo cerdo\n");
+           listaLarga.add("Guarapo leche arroz azucar caldo sopa pescado gato gato gato gato Guarapo\n");                                                                            
+           
+           for(int i=0; i<resLarga.size(); i++){               
+                try {
+                   assertEquals(
+                    "Las cadenas largas no coinciden",
+                        resLarga.get(i) ,listaLarga.get(i)                                                         
+                    );
+               } catch (Exception e) {
+               }
            }
            
            listaCorta.add("gato perro pez perro vaca cerdo vaca pez pez pez\n");
            listaCorta.add("Guarapo leche arroz azucar caldo sopa pescado gato gato gato gato Guarapo\n");
            
            for(int i = 0; i < listaCorta.size(); i++)
-               assertEquals(
+               try {
+                   assertEquals(
                    "Las cadenas cortas no coinciden",
                    listaCorta.get(i),
                    resCorta.get(i)
-               );           
+               );
+               } catch (Exception e) {
+               }
+           
        }else{
            System.out.println("El número no es entero.");
        }
